@@ -9,7 +9,6 @@ go:
 
 before_install:
   - sudo apt-get remove libssl-dev || true
-  - go get -v -t $(go list ./... | grep -v vendor)
   - go get -d github.com/git-time-metric/git2go
   - cd $GOPATH/src/github.com/git-time-metric/git2go
   - git checkout v25
