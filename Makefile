@@ -2,12 +2,13 @@ BINARY=gtm
 VERSION=v1.2.8-beta
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION}"
+BLD_TAGS=--tags static
 
 build:
-	go build ${LDFLAGS} -o ${BINARY}
+	go build ${BLD_TAGS} ${LDFLAGS} -o ${BINARY}
 
 test:
-	go test $$(go list ./... | grep -v vendor)
+	go test ${BLD_TAGS} $$(go list ./... | grep -v vendor)
 
 vet:
 	go vet $$(go list ./... | grep -v vendor)
@@ -15,8 +16,11 @@ vet:
 fmt:
 	go fmt $$(go list ./... | grep -v vendor)
 
+install-git2go:
+	cd ${GOPATH}/src/github.com/git-time-metric/git2go; git submodule update --init; make install-static
+
 install:
-	go install ${LDFLAGS}
+	go install ${BLD_TAGS} ${LDFLAGS}
 
 clean:
 	go clean

@@ -7,19 +7,19 @@ export GOPATH=/c/gopath
 
 go get -d github.com/git-time-metric/git2go
 cd /c/gopath/src/github.com/git-time-metric/git2go
-git checkout next
+git checkout v25
 git submodule update --init
 
-make install
+make install-static
 
 cd /c/gopath/src/github.com/git-time-metric/gtm
 go get -t -v ./...
-go test -v ./...
+go test --tags static -v ./...
 if [[ "${APPVEYOR_REPO_TAG}" = true ]]; then
-    go build -v -ldflags "-X main.Version=${APPVEYOR_REPO_TAG_NAME}"
+    go build --tags static -v -ldflags "-X main.Version=${APPVEYOR_REPO_TAG_NAME}"
     tar -zcf gtm.${APPVEYOR_REPO_TAG_NAME}.windows.tar.gz gtm.exe
 else
     timestamp=$(date +%s)
-    go build -v -ldflags "-X main.Version=developer-build-$timestamp"
+    go build --tags static -v -ldflags "-X main.Version=developer-build-$timestamp"
     tar -zcf "gtm.developer-build-$timestamp.windows.tar.gz" gtm.exe
 fi
