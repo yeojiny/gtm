@@ -9,9 +9,6 @@ build:
 test:
 	go test -tags static $$(go list ./... | grep -v vendor)
 
-test-coverage:
-	go test -covermode=count -coverprofile=coverage.out -tags static $$(go list ./... | grep -v vendor)
-
 vet:
 	go vet $$(go list ./... | grep -v vendor)
 
