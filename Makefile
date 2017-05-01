@@ -17,7 +17,7 @@ fmt:
 	go fmt $$(go list ./... | grep -v vendor)
 
 install-git2go:
-	cd ${GOPATH}/src/github.com/git-time-metric/git2go; git submodule update --init; make install-static
+	cd ${GOPATH}/src/github.com/git-time-metric/git2go; git checkout v25; git submodule update --init; make install-static
 
 install:
 	go install ${BLD_TAGS} ${LDFLAGS}
