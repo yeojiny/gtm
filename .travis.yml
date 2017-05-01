@@ -1,7 +1,5 @@
 language: go
 
-gobuild_args: --tags static
-
 os:
   - linux
   - osx
@@ -23,8 +21,9 @@ before_deploy:
   - tar -zcf gtm.${TRAVIS_TAG}.${TRAVIS_OS_NAME}.tar.gz gtm
 
 script:
-  - go get -v ./...
-  - go test -v ./...
+  - make test
+  # - go get -v ./...
+  # - go test -v ./...
   # - go get github.com/mattn/goveralls
   # - $HOME/gopath/bin/goveralls -service=travis-ci
 
