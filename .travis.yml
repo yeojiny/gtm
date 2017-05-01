@@ -22,11 +22,10 @@ before_deploy:
 
 script:
   - go get --tags static -t -v ./...
-  - make test
-  - go get github.com/mattn/goveralls
   - go get golang.org/x/tools/cmd/cover
-  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci 
-  # - $HOME/gopath/bin/goveralls -service=travis-ci
+  - go get github.com/mattn/goveralls
+  - make test-coverage
+  - $HOME/gopath/bin/goveralls -service=travis-ci
 
 deploy:
   provider: releases
