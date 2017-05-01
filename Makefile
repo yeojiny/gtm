@@ -7,10 +7,10 @@ build:
 	go build -tags static ${LDFLAGS} -o ${BINARY}
 
 test:
-	go test -covermode=count -coverprofile=coverage.out -tags static $$(go list ./... | grep -v vendor)
+	go test -tags static $$(go list ./... | grep -v vendor)
 
 test-coverage:
-	go test -tags static $$(go list ./... | grep -v vendor)
+	go test -covermode=count -coverprofile=coverage.out -tags static $$(go list ./... | grep -v vendor)
 
 vet:
 	go vet $$(go list ./... | grep -v vendor)
