@@ -22,7 +22,7 @@ before_deploy:
 
 script:
   - go get -v ./...
-  - go test --tags static $$(go list ./... | grep -v vendor)
+  - make test
   # - go test --tags static -v ./...
   # - go get github.com/mattn/goveralls
   # - $HOME/gopath/bin/goveralls -service=travis-ci
