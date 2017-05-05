@@ -10,17 +10,7 @@ cd /c/gopath/src/github.com/git-time-metric/git2go
 git checkout v25
 git submodule update --init
 
-export BUILD="$PWD/vendor/libgit2/build"
-export PCFILE="$BUILD/libgit2.pc"
-
-FLAGS=$(pkg-config --static --libs $PCFILE) || exit 1
-if [[ "$OSTYPE" == "msys" ]]; then 
-  if [[ ! "lws2_32" == *"${FLAGS}"* ]]; then
-    FLAGS="${FLAGS} -lws2_32"
-  fi
-fi
-export CGO_LDFLAGS="$BUILD/libgit2.a -L$BUILD ${FLAGS}"
-export CGO_CFLAGS="-I$PWD/vendor/libgit2/include"
+export CGO_CFLAGS=-I/c/gopath/src/github.com/git-time-metric/git2go/vendor/libgit2/include
 make install-static
 
 cd /c/gopath/src/github.com/git-time-metric/gtm
